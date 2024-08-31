@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Client</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="./EchoFlick.js?v2=1000"></script>
+    <script src="./custom.js?v2=1000"></script>
+    <link rel="stylesheet" href="./chat_style.css?v2=1000">
+</head>
+
+<body>
+    <div class="page-content page-container" id="page-content">
+        <div class="padding">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-bordered">
+                        <div class="card-header">
+                            <h4 class="card-title"><strong>Chat Room (Anonymous Chat)</strong></h4>
+                            <button id="exit" class="btn btn-danger">Exit</button>
+                        </div>
+                        <div class="card-header">
+                            <h4 class="card-title"><strong>Room Name: <span id="room_name"></span></strong></h4>
+                            <h4 class="card-title"><strong>User Name: <span id="nick_name"></span></strong></h4>
+                        </div>
+                        <div class="chat_box_main_section">
+                            <div class="chat_box_section1">
+                                <div class="ps-container ps-theme-default ps-active-y" id="chat-content"
+                                    style="overflow-y: scroll !important; height:400px !important;">
+
+                                    <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;" id="index_add">
+                                        <div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+                                    </div>
+
+                                    <div class="ps-scrollbar-y-rail" style="top: 0px; height: 0px; right: 2px;">
+                                        <div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 2px;"></div>
+                                    </div>
+                                </div>
+
+                                <div class="publisher bt-1 border-light">
+                                    <input class="publisher-input" type="text" placeholder="Write something" id="chat_msg">
+
+                                    <a class="publisher-btn text-info" href="#" data-abc="true" id="send_message"><i
+                                            class="fa fa-paper-plane"></i></a>
+                                </div>
+                            </div>
+                            <div class="chat_box_section2" id="active_users">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Login</title>
+	<link rel="stylesheet" type="text/css" href="style.css?v2=1000">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+	<div class="login">
+		<h1>Login</h1>
+		<input type="text" name="room" placeholder="Room Name" required="required" id="room_name" value="madurai" />
+		<input type="text" name="nick" placeholder="Nick Name" required="required" id="nick_name" value="karthick" />
+		<select name="gender" id="gender">
+			<option value="male">Male</option>
+			<option value="female">Female</option>
+		</select>
+		<button type="button" id="login_d" class="btn btn-primary btn-block btn-large">Let me in.</button>
+	</div>
+</body>
+
+</html>
+<script>
+	$(document).ready(function() {
+		let baseURL = '/chat';
+		function login(room_name, nick_name, gender = 'male') {
+			$.ajax({
+				url: 'https://randomuser.me/api/?gender=' + gender,
+				dataType: 'json',
+				success: function(data) {
+					let profile = data.results[0];
+					if (profile) {
+
+						let user = {
+							name: nick_name,
+							photo: profile.picture.thumbnail,
+							gender: gender
+						};
+
+						localStorage.setItem('room_name', room_name);
+						localStorage.setItem('login_user', JSON.stringify(user));
+
+						window.location.href = baseURL + 'chat.php';
+
+					} else {
+						$('#login_d').removeAttr('disabled');
+						alert('something went wrong, visit later');
+					}
+				}
+			});
+
+		}
+
+
+		$("#login_d").click(function() {
+			var room_name = $('#room_name').val().trim();
+			// Replace spaces with underscores and convert to lowercase
+			room_name = room_name.replace(/\s+/g, '_').toLowerCase();
+			var nick_name = $('#nick_name').val().trim();
+			var gender = $('#gender').val();
+			$('#login_d').attr('disabled', 'disabled');
+
+			if (room_name.length < 6) {
+				alert('Room name should be min 6 letters');
+				$('#login_d').removeAttr('disabled');
+
+				return '';
+			}
+
+			if (nick_name.length < 5) {
+				alert('Nick name should be min 5 letters');
+				$('#login_d').removeAttr('disabled');
+
+				return '';
+			}
+
+			login(room_name, nick_name, gender);
+		});
+	});
+</script>

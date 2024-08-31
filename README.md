@@ -20,3 +20,13 @@ Welcome to the Room Chat App! This application allows users to create and join c
 - **WebSocket**: Ensures real-time, bi-directional communication between the client and server.
 - **EchoFlick CDN**: Delivers content quickly and reliably, enhancing the user experience.
 - **Node.js**: Powers the backend server, handling WebSocket connections and managing chat rooms.
+
+## Testing Keys
+
+For testing purposes, you can use the following keys:
+
+- `hq4qlBbWhAjIUpuzayI8A79vhgUrmEO8`
+- `jtIFcrdrhPlBBNeTAlv4QuDvfBL6ODp2`
+- `JrJwKIf4NihWz98GImLZD8neRvj1otEd`
+- `rwe1jDLQDNxNfEE7BMmpHLEuAxSSEZfn`
+- `M992vCUPr66bpQGkw60kYHmZKDb7FSa1`
