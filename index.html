@@ -23,7 +23,7 @@
 </html>
 <script>
 	$(document).ready(function() {
-		let baseURL = '/chat';
+		let baseURL = '/';
 		function login(room_name, nick_name, gender = 'male') {
 			$.ajax({
 				url: 'https://randomuser.me/api/?gender=' + gender,
@@ -41,7 +41,7 @@
 						localStorage.setItem('room_name', room_name);
 						localStorage.setItem('login_user', JSON.stringify(user));
 
-						window.location.href = baseURL + 'chat.php';
+						window.location.href = baseURL + 'chat.html';
 
 					} else {
 						$('#login_d').removeAttr('disabled');
