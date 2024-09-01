@@ -60,6 +60,16 @@ function removeActiveUser(data) {
 let photo = 'https://img.icons8.com/color/36/000000/administrator-male.png';
 
 $(document).ready(function(){
+    
+    async function getChannels(room_name=null){
+        let response = await wsClient.getActiveChannels(room_name);
+        $('#active_users').empty();
+        let activeClient = response.data;
+        activeClient.forEach(data => {
+            addActiveUser(data.channelInfo);
+        });
+    }
+
     var room_name = localStorage.getItem('room_name');
     var login_user = localStorage.getItem('login_user');
     user = JSON.parse(login_user);
@@ -87,7 +97,7 @@ $(document).ready(function(){
        console.log('Connected to Websocket');
        wsClient.updateChannelInfo(user);
        wsClient.addGroup(room_name);
-       wsClient.getActiveChannels(room_name);
+       getChannels(room_name);
     });
 
     // Receive Message from server
@@ -103,19 +113,6 @@ $(document).ready(function(){
         }else if(response.data === 'left'){
             removeActiveUser(response.channelInfo);
         }
-    });
-
-    // Receive Message from server if user joined or left in your group
-    wsClient.onActiveChannels((response) => {
-        
-        if(response.type === 'GET_ACTIVE_CHANNELS'){
-            $('#active_users').empty();
-            let activeClient = response.data;
-            activeClient.forEach(data => {
-                addActiveUser(data.channelInfo);
-            });
-        }
-        // console.log(response)
     });
 
     // If Server Close connection, it will called
