@@ -76,7 +76,7 @@ $(document).ready(function(){
     var room_name = localStorage.getItem('room_name');
     var login_user = localStorage.getItem('login_user');
     user = JSON.parse(login_user);
-    let baseURL = '/';
+    let baseURL = 'https://echoflick05.github.io/roomChat/';
     if (room_name === null || room_name === undefined) {
         window.location.href = baseURL;
         return '';
