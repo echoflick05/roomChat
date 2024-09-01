@@ -22,20 +22,31 @@
 
 </html>
 <script>
-	$(document).ready(function() {
+	function guid() {
+		function s4() {
+			return Math.floor((1 + Math.random()) * 0x10000)
+				.toString(16)
+				.substring(1);
+		}
+		return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+			s4() + '-' + s4() + s4() + s4();
+	}
+
+	$(document).ready(function () {
 		let baseURL = '/';
 		function login(room_name, nick_name, gender = 'male') {
 			$.ajax({
 				url: 'https://randomuser.me/api/?gender=' + gender,
 				dataType: 'json',
-				success: function(data) {
+				success: function (data) {
 					let profile = data.results[0];
 					if (profile) {
 
 						let user = {
 							name: nick_name,
 							photo: profile.picture.thumbnail,
-							gender: gender
+							gender: gender,
+							id: guid()
 						};
 
 						localStorage.setItem('room_name', room_name);
@@ -53,7 +64,7 @@
 		}
 
 
-		$("#login_d").click(function() {
+		$("#login_d").click(function () {
 			var room_name = $('#room_name').val().trim();
 			// Replace spaces with underscores and convert to lowercase
 			room_name = room_name.replace(/\s+/g, '_').toLowerCase();

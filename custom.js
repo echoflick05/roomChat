@@ -39,6 +39,9 @@ function scrollToBottom() {
 }
 
 function addActiveUser(data) {
+    if ($(`#${data.id}`).length) {
+        $(`#${data.id}`).remove();
+    }
     var html = `<div id="${data.id}">
                 <div class="media media-chat">
                     <img class="avatar" src='${data.photo}' alt="user_icon">
@@ -87,7 +90,7 @@ $(document).ready(function(){
     $('#nick_name').html(user.name);
 
     const channelId = guid();
-    user.id = channelId;
+    // user.id = channelId;
 
     // Create an instance of WebSocketClient
     const wsClient = new EchoFlickClient('hq4qlBbWhAjIUpuzayI8A79vhgUrmEO8',channelId);
@@ -108,6 +111,7 @@ $(document).ready(function(){
 
     // Receive Message from server if user joined or left in your group
     wsClient.onClientGroup((response) => {
+        console.log(response);
         if(response.data === 'joined'){
             addActiveUser(response.channelInfo);
         }else if(response.data === 'left'){
