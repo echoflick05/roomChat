@@ -39,6 +39,7 @@ function scrollToBottom() {
 }
 
 function addActiveUser(data) {
+    $('#no_user_tag').remove();
     if ($(`#${data.id}`).length) {
         $(`#${data.id}`).remove();
     }
@@ -60,6 +61,22 @@ function removeActiveUser(data) {
     }
 }
 
+function addNoUser(){
+    if($('#no_user_tag').length){
+        return '';
+    }
+    var childCount = $('#active_users').children().length;
+    if(childCount === 0){
+        $('#active_users').html(`<div id="no_user_tag">
+                <div class="media media-chat">
+                    <div class="media-body">
+                        <p>No Active User Present in this room</p>
+                    </div>
+                </div>
+             </div>`)
+    }
+}
+
 let photo = 'https://img.icons8.com/color/36/000000/administrator-male.png';
 
 $(document).ready(function(){
@@ -71,12 +88,13 @@ $(document).ready(function(){
         activeClient.forEach(data => {
             addActiveUser(data.channelInfo);
         });
+        addNoUser();
     }
 
     var room_name = localStorage.getItem('room_name');
     var login_user = localStorage.getItem('login_user');
     user = JSON.parse(login_user);
-    let baseURL = 'https://echoflick05.github.io/roomChat/';
+    let baseURL = '/';
     if (room_name === null || room_name === undefined) {
         window.location.href = baseURL;
         return '';
@@ -117,6 +135,7 @@ $(document).ready(function(){
         }else if(response.data === 'left'){
             removeActiveUser(response.channelInfo);
         }
+        addNoUser();
     });
 
     // If Server Close connection, it will called

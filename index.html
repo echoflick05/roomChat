@@ -1,25 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-	<title>Login</title>
-	<link rel="stylesheet" type="text/css" href="style.css?v2=1000">
+    <title>Glassmorphism login Form Tutorial in html css</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 
 <body>
-	<div class="login">
-		<h1>Login</h1>
-		<input type="text" name="room" placeholder="Room Name" required="required" id="room_name" value="" />
-		<input type="text" name="nick" placeholder="Nick Name" required="required" id="nick_name" value="" />
-		<select name="gender" id="gender">
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <div id="form_section">
+        <h3>Room Chat</h3>
+
+        <label for="room_name">Room Name</label>
+        <input type="text" placeholder="Room Name" id="room_name" autocomplete="off" name="room">
+
+        <label for="nick_name">User Name</label>
+        <input type="text" placeholder="User Name" id="nick_name"  autocomplete="off" name="nick">
+        
+        <label for="gender">Gender</label>
+        <select name="gender" id="gender">
 			<option value="male">Male</option>
 			<option value="female">Female</option>
 		</select>
-		<button type="button" id="login_d" class="btn btn-primary btn-block btn-large">Let me in.</button>
-	</div>
-</body>
 
+        <button type="button" id="login_d">Log In</button>
+        
+    </div>
+</body>
 </html>
 <script>
 	function guid() {
@@ -33,7 +48,7 @@
 	}
 
 	$(document).ready(function () {
-		let baseURL = 'https://echoflick05.github.io/roomChat/';
+		let baseURL = '/';
 		function login(room_name, nick_name, gender = 'male') {
 			$.ajax({
 				url: 'https://randomuser.me/api/?gender=' + gender,
@@ -56,6 +71,7 @@
 
 					} else {
 						$('#login_d').removeAttr('disabled');
+						$('#login_d').html('Log In');
 						alert('something went wrong, visit later');
 					}
 				}
@@ -65,24 +81,25 @@
 
 
 		$("#login_d").click(function () {
+
 			var room_name = $('#room_name').val().trim();
 			// Replace spaces with underscores and convert to lowercase
 			room_name = room_name.replace(/\s+/g, '_').toLowerCase();
 			var nick_name = $('#nick_name').val().trim();
 			var gender = $('#gender').val();
 			$('#login_d').attr('disabled', 'disabled');
-
+			$('#login_d').html('...');
 			if (room_name.length < 6) {
 				alert('Room name should be min 6 letters');
 				$('#login_d').removeAttr('disabled');
-
+				$('#login_d').html('Log In');
 				return '';
 			}
 
 			if (nick_name.length < 5) {
 				alert('Nick name should be min 5 letters');
 				$('#login_d').removeAttr('disabled');
-
+				$('#login_d').html('Log In');
 				return '';
 			}
 
